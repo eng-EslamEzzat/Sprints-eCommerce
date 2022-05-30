@@ -37,7 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'APIs',
+    'rest_framework',
+    'rest_framework.authtoken',
+
 ]
+
+
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': f"%m-%d-%Y %I:%M %p",
+}
+
+AUTH_USER_MODEL = 'APIs.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
