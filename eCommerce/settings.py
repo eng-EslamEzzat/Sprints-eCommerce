@@ -98,7 +98,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'eCommerce.wsgi.application'
 
-
+#eslam
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
