@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from decouple import config
 from dj_database_url import parse as dburl
+import django_on_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1','.localhost', 'sprintsecommerce.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.localhost', 'sprintsecommerce.herokuapp.com', '*']
 
 
 # Application definition
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_extensions'
 ]
 
 
