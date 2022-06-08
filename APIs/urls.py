@@ -16,7 +16,6 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
-            'user_id': user.pk,
             'username': user.username
         })
 
@@ -27,4 +26,5 @@ urlpatterns = [
     path('',include(router.urls)),
     path('api-auth', include('rest_framework.urls')),
     path('api-token-auth', CustomAuthToken.as_view()),
+    path('logout', views.LogoutView.as_view())
 ]
