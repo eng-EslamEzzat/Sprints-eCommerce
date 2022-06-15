@@ -16,15 +16,20 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
-            'username': user.username
+            'username': user.username,
+            'is_admin': user.is_staff,
         })
 
 router = DefaultRouter()
 router.register('users', views.UserViewSet)
+router.register('products', views.ProductViewSet)
+router.register('cudproduct', views.CUDProductViewSet)
+router.register('images', views.ImageViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),
     path('api-auth', include('rest_framework.urls')),
     path('api-token-auth', CustomAuthToken.as_view()),
-    path('logout', views.LogoutView.as_view())
+    path('logout', views.LogoutView.as_view()),
+    # path('products', views.PostProductViewSet.as_view()),
 ]
