@@ -62,7 +62,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         model =  Review
         fields = ['rating', 'comment', 'created_at']
 
-class PostProductSerializer(serializers.ModelSerializer):
+class CUDProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model =  Product

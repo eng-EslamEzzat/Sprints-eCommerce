@@ -23,8 +23,8 @@ class CustomAuthToken(ObtainAuthToken):
 router = DefaultRouter()
 router.register('users', views.UserViewSet)
 router.register('products', views.ProductViewSet)
-router.register('cudproduct', views.CUDProductViewSet)
-router.register('images', views.ImageViewSet)
+router.register('cudproducts', views.CUDProductViewSet)
+# router.register('images', views.ImageViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),

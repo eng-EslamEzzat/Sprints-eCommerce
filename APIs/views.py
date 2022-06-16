@@ -29,6 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class CUDProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = PostProductSerializer
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAdminUser]
 
     def create(self, request, *args, **kwargs):
@@ -54,6 +55,7 @@ class CUDProductViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
 
     def create(self, request):

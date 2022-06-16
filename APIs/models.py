@@ -27,6 +27,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateField(auto_now_add=True)
     is_exists = models.BooleanField(default=True)
+    availability = models.IntegerField(default=0)
     
     class Meta:
         ordering = ('-created_at',)
