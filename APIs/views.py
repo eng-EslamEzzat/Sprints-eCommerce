@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from .models import Image, Product, User
-from .serializers import ImageListSerializer, ImageSerializer, PostProductSerializer, ProductSerializer, UserSerializer
+from .serializers import CUDProductSerializer, ImageListSerializer, ImageSerializer, ProductSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.authtoken.models import Token
@@ -28,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
 #Create Update Delete Products
 class CUDProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = PostProductSerializer
+    serializer_class = CUDProductSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAdminUser]
 
