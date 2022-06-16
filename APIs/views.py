@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.views import APIView
 from .models import Image, Product, User
 from .serializers import CUDProductSerializer, ImageListSerializer, ImageSerializer, ProductSerializer, UserSerializer
@@ -57,6 +57,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'discription', 'productDetails']
 
     def create(self, request):
         return Response({'error': "POST Metheod does not support on this api"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
