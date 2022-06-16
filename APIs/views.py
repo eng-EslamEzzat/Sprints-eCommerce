@@ -1,12 +1,11 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.views import APIView
 from .models import Image, Product, User
-from .serializers import CUDProductSerializer, ImageListSerializer, ImageSerializer, ProductSerializer, UserSerializer
+from .serializers import CUDProductSerializer, ProductSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from django.contrib.auth import logout
 
 
 #user viewsets with CRUD operations
@@ -58,7 +57,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'discription', 'productDetails']
+    search_fields = ['name', 'discription']
 
     def create(self, request):
         return Response({'error': "POST Metheod does not support on this api"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -71,20 +70,6 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         return Response({'error': "DELETE Metheod does not support on this api"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
- 
-
-# class ImageViewSet(viewsets.ModelViewSet):
-#     queryset = Image.objects.all()
-#     serializer_class = ImageListSerializer
-
-# class ImageView(APIView):
-#     def post(self, request):
-#         if request.FILES:
-#             images = request.FILES.getlist('image')
-#             product = Product.objects.get(pk=int(request.data['product']))
-#             for img in images:
-#                 Image.objects.create(image=img, product=product)
-#             print(images)
 
 
 #logout by changing token
@@ -95,8 +80,6 @@ class LogoutView(APIView):
             user = User.objects.get(username=str(request.data['username']))
             user_token = Token.objects.get(user=user)
             if user_token.key == token:
-                request.user.auth_token.delete() #trying this for logout
-                logout(request) #trying this for logout
                 user_token.delete()
                 Token.objects.create(user=user)
                 return Response({"message": "Logedout successfully"}, status=status.HTTP_201_CREATED)
