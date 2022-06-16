@@ -1,4 +1,3 @@
-from urllib import request
 from rest_framework import serializers
 from .models import Brand, Category, Image, Order, Product, Review, User
 from rest_framework.authtoken.models import Token
@@ -70,6 +69,7 @@ class ProductSerializer(serializers.ModelSerializer):
     buyers = UserSerializer(many=True, required=False, read_only=True)
     images = ImageSerializer(many=True, required=False, read_only=True,)
     reviews = ReviewSerializer(many=True, required=False, read_only=True)
+    avg_rating = serializers.IntegerField()
 
     class Meta:
         model =  Product
