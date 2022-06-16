@@ -24,12 +24,11 @@ router = DefaultRouter()
 router.register('users', views.UserViewSet)
 router.register('products', views.ProductViewSet)
 router.register('cudproducts', views.CUDProductViewSet)
-# router.register('images', views.ImageViewSet)
+router.register('reviews', views.ReviewViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),
     path('api-auth', include('rest_framework.urls')),
     path('api-token-auth', CustomAuthToken.as_view()),
     path('logout', views.LogoutView.as_view()),
-    # path('products', views.PostProductViewSet.as_view()),
 ]

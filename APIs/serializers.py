@@ -60,7 +60,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Review
-        fields = ['rating', 'comment', 'created_at']
+        fields = ['buyer','product', 'rating', 'comment', 'created_at']
 
 class CUDProductSerializer(serializers.ModelSerializer):
     
@@ -73,11 +73,11 @@ class CUDProductSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     buyers = UserSerializer(many=True, required=False, read_only=True)
     images = ImageSerializer(many=True, required=False, read_only=True,)
+    reviews = ReviewSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model =  Product
         fields = "__all__"
-        extra_fields = ["images"]
         depth = 2
 
         

@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.views import APIView
-from .models import Image, Product, User
-from .serializers import CUDProductSerializer, ProductSerializer, UserSerializer
+from .models import Image, Product, Review, User
+from .serializers import CUDProductSerializer, ProductSerializer, ReviewSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.authtoken.models import Token
@@ -70,6 +70,12 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         return Response({'error': "DELETE Metheod does not support on this api"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+#CRUD Review
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
 
 #logout by changing token
