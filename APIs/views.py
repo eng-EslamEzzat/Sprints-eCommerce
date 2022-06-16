@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.views import APIView
-from .models import Image, Product, Review, User
-from .serializers import CUDProductSerializer, ProductSerializer, ReviewSerializer, UserSerializer
+from .models import Image, Order, Product, Review, User
+from .serializers import CUDProductSerializer, OrderSerializer, ProductSerializer, ReviewSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.authtoken.models import Token
@@ -76,7 +76,14 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 #logout by changing token
 class LogoutView(APIView):

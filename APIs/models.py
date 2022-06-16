@@ -12,20 +12,17 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=250, unique=True)
 
-class ProductState(models.Model):
-    state = models.CharField(max_length=250, unique=True)
-
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
     discription = models.CharField(max_length=500)
     productDetails = models.TextField()
     price= models.DecimalField(max_digits=9, decimal_places=2)
-    state = models.ForeignKey(ProductState, on_delete= models.CASCADE, related_name='products')
     buyers = models.ManyToManyField(User, related_name='purchases', blank=True)
     categories = models.ManyToManyField(Category, related_name='products')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
     is_exists = models.BooleanField(default=True)
     availability = models.IntegerField(default=0)
     
@@ -44,7 +41,6 @@ class Image(models.Model):
     image_url = models.ImageField(upload_to = "images/", blank=True, null=True)
 
 
-
 class Review(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
@@ -58,3 +54,22 @@ class Review(models.Model):
     class Meta:
         unique_together = ('buyer', 'product',)
 
+
+class Order(models.Model):
+
+    ORDER_STATUSES = (
+        ('pending','PENDING'),
+        ('in review','IN_REVIEW'),
+        ('canceled','CANCELLED'),
+        ('in progress','IN_PROGRESS'),
+        ('on the way','ON_THE_way'),
+        ('delivered', 'DELIVERED'),
+    )
+    
+    buyer = models.ForeignKey(User, on_delete= models.CASCADE, related_name='orders')
+    product = models.ForeignKey(Product, on_delete= models.CASCADE, related_name='oreders')
+    order_status = models.CharField(max_length=20, choices=ORDER_STATUSES,
+                                         default=ORDER_STATUSES[0][0])
+    quantity = models.IntegerField(default=1)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)

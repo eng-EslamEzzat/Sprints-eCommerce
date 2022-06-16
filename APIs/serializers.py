@@ -1,5 +1,6 @@
+from urllib import request
 from rest_framework import serializers
-from .models import Brand, Category, Image, Product, ProductState, Review, User
+from .models import Brand, Category, Image, Order, Product, Review, User
 from rest_framework.authtoken.models import Token
 
 
@@ -34,11 +35,6 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Brand
         fields = ['name']
-
-class ProductStateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model =  ProductState
-        fields = ['state']
 
 class ImageListSerializer ( serializers.Serializer ) :
     image = serializers.ListField(child=serializers.FileField())
@@ -81,3 +77,17 @@ class ProductSerializer(serializers.ModelSerializer):
         depth = 2
 
         
+class OrderSerializer(serializers.ModelSerializer):
+    # buyer = UserSerializer( required=False, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = "__all__"
+    
+    def to_representation(self, instance):
+        data = super(OrderSerializer, self).to_representation(instance)
+        id = data.get('buyer')
+        user = User.objects.get(pk = int(id))
+        buyer = UserSerializer(user)
+        data.pop('buyer')
+        return {"buyer": buyer.data, **data}
