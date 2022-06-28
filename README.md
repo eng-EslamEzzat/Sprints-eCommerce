@@ -20,8 +20,11 @@
 ## how to install
 `` 
 pip install pipenv
+
 pipenv shell
+
 pip install -r requirements.txt 
+
 ``
 
 ## run the project
