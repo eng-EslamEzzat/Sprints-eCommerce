@@ -13,13 +13,14 @@
 - Search: http://sprintsecommerce.herokuapp.com/api/products/?search=whateveruwant
 
 > CRUD: create , list , retrieve , update , delete
+
 > CUD: only create, update, delete
 
 
 ## how to install
-1. ### `pip install pipenv`
-2. ### `pipenv shell`
-3. ### `pip install -r requirements.txt `
+1. #### `pip install pipenv`
+2. #### `pipenv shell`
+3. #### `pip install -r requirements.txt `
 
 
 ## run the project
