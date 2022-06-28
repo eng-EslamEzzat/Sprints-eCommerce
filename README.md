@@ -14,6 +14,7 @@
 
 
 > CRUD: create , list , retrieve , update , delete
+
 > CUD: only create, update, delete
 
 
