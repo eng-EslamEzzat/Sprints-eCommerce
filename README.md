@@ -17,9 +17,9 @@
 
 
 ## how to install
-### `pip install pipenv`
-### `pipenv shell`
-### `pip install -r requirements.txt `
+1. ### `pip install pipenv`
+2. ### `pipenv shell`
+3. ### `pip install -r requirements.txt `
 
 
 ## run the project
