@@ -25,6 +25,7 @@ class Product(models.Model):
     updated_at = models.DateField(auto_now=True)
     is_exists = models.BooleanField(default=True)
     availability = models.IntegerField(default=0)
+    attributes = models.JSONField(default=dict, blank=True)
     
     class Meta:
         ordering = ('-created_at',)
